@@ -6,7 +6,7 @@ const port = process.env.PORT || 5000;
 // let io = require('socket.io')(http);
 
 // self ping keeps heroku dynos from falling asleep
-require('heroku-self-ping')("https://helios-tuddle.herokuapp.com/");
+require('heroku-self-ping')("https://tuddle.herokuapp.com/");
 
 // Serve the static files from the React app
 app.use(express.static(path.join(__dirname, 'client/build')));
