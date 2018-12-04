@@ -6,28 +6,30 @@ import List from './Home/List';
 import Counter from './counter/components/counter';
 
 import { Provider } from 'react-redux';
-import { createStore } from 'redux';
+import { createStore, applyMiddleware } from 'redux';
 
-const initialState = {
-	count: 0
-  };
+import rootReducer from './reducers/rootReducer';
+
+// const initialState = {
+// 	count: 0
+//   };
   
-function reducer(state = initialState, action) {
-  switch(action.type) {
-    case 'INCREMENT':
-      return {
-        count: state.count + 1
-      };
-    case 'DECREMENT':
-      return {
-        count: state.count - 1
-      };
-    default:
-      return state;
-  }
-}
-  
-const store = createStore(reducer);
+// function reducer(state = initialState, action) {
+//   switch(action.type) {
+//     case 'INCREMENT':
+//       return {
+//         count: state.count + 1
+//       };
+//     case 'DECREMENT':
+//       return {
+//         count: state.count - 1
+//       };
+//     default:
+//       return state;
+//   }
+// }
+
+const createStoreWithMiddleware = applyMiddleware()(createStore);
 
 class App extends Component {
   render() {
@@ -39,7 +41,7 @@ class App extends Component {
         </Switch>
     )
     return (
-      <Provider store={store}>
+      <Provider store={createStoreWithMiddleware(rootReducer)}>
         <App/>
       </Provider>
     );
